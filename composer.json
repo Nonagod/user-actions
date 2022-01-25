@@ -1,0 +1,21 @@
+{
+    "version": "1.0.0",
+    "name": "nonagod/user-actions",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nonagod",
+            "email": "nonagod.public@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Nonagod\\UserActions\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "nonagod/service": "^1.0"
+    }
+}
