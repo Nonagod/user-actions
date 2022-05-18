@@ -45,9 +45,11 @@ $this->failed("ERROR", "Ошибка");
 > вызывает `failed`. В таком случае, явный вызов в обработчике не требуется.
 
 #### `succeed( $answer_data = null )`:
+Отправляет ответ об успешном завершение обработчика.
 - `?mixed $answer_data` - произвольные данные, для дополнительной обработке на клиенте
 
 #### `failed( string $code, string $msg = null, $error_info = null )`:
+Отправляет ответ об ошибке обработчика.
 - `string $code` - код ошибки
 - `?string $msg` - краткое описание ошибки
 - `?mixed $error_info` - дополнительные данные для доп. обработки ошибки на клиенте
@@ -65,9 +67,11 @@ $UAManager->defineEndOfContentPart('<part_name>');
 > **Замечание:** `defineStartOfContentPart` и `defineEndOfContentPart` парные методы.
 
 #### `defineStartOfContentPart( $name )`:
+Опеределяет начало запрашиваемой части контента.
 - `string $name` - кодовое обозначение части страницы
 
 #### `defineEndOfContentPart( $name )`:
+Опеределяет конец запрашиваемой части контента.
 - `string $name` - кодовое обозначение части страницы
 
 ## <a name="formats"></a>Форматы
