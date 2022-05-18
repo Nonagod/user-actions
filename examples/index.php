@@ -3,7 +3,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use \Nonagod\UserActions\Manager;
 
-$AM = new Manager('/examples/_resources/UAM');
+$AM = new Manager($_SERVER['DOCUMENT_ROOT'] . '/examples/_resources/UAM');
 
 ?>
 

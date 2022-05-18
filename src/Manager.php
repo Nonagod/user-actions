@@ -22,8 +22,8 @@ class Manager {
     private bool $is_response_sent = false;
 
 
-    public function __construct( $relative_path_to_handlers_folder = '/_resources/UAM' ) {
-        $this->absolute_path_to_handlers_folder = $_SERVER['DOCUMENT_ROOT'] . $relative_path_to_handlers_folder;
+    public function __construct( $absolute_path_to_handlers_folder ) {
+        $this->absolute_path_to_handlers_folder = $absolute_path_to_handlers_folder;
         $this->checkRequestForAnAction();
 
         try {
@@ -47,11 +47,11 @@ class Manager {
     }
 
 
-    protected function succeed( $answer_data ) {
+    protected function succeed( $answer_data = null ) {
         $this->sendResponse( true, $answer_data );
     }
     //abort
-    protected function failed( string $code, string $msg = null, $error_info = null) {
+    protected function failed( string $code, string $msg = null, $error_info = null ) {
         $this->sendResponse( false, array(
             'code' => $code,
             'msg' => $msg,
@@ -112,15 +112,3 @@ class Manager {
         }
     }
 }
-
-// Правила
-// Каждый обработчик ДОЛЖЕН устанавливать ответ (успешный и неуспешный)!
-// Капча и логирование запросов делается в конкретном обработчике (в частности). Можно выносить в общий файл.
-
-// Текстовое сообщение нужно не во всех случаях (в основном только при ошибках).
-
-// На подумать
-// todo подумать нужно ли делать проверку на вызов в обработчике setResponse (HANDLER_WRONG_EXIT)
-// todo подумать нужно ли делать сбрасывать _tmp_response после завершения, иначе комплекс без явного указания возвращает последний
-// todo сделать отлов других ошибок в конструкторе и их логирование, а пользователю общий ответ (что-то не так)
-// Можно сделать для обработчиков свой класс, чтобы убрать рутину из обработчиков. (+ управлять валидацией и откатом)
