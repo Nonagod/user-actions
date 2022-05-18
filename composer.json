@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "name": "nonagod/user-actions",
     "type": "project",
     "license": "MIT",
@@ -16,6 +16,6 @@
     },
     "require": {
         "php": ">=7.4",
-        "nonagod/service": "^1.0"
+        "nonagod/service": "^2"
     }
 }

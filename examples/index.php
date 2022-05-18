@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use \Nonagod\UserActions\UserActionsManager;
+use \Nonagod\UserActions\Manager;
 
-$AM = new UserActionsManager('/examples/_resources/UAM');
+$AM = new Manager('/examples/_resources/UAM');
 
 ?>
 
@@ -43,8 +43,7 @@ $AM = new UserActionsManager('/examples/_resources/UAM');
     <?$AM->defineStartOfContentPart('cases');?>
     <div class="js-setFormData" data-preset_data_number="1">Привет мир</div>
     <div class="js-setFormData" data-preset_data_number="2">Запросить контент</div>
-    <div class="js-setFormData" data-preset_data_number="3">Комплексное (буфер)</div>
-    <div class="js-setFormData" data-preset_data_number="4">Комплексное (говори)</div>
+    <div class="js-setFormData" data-preset_data_number="3">Ошибка капчи (пример разнесения)</div>
     <?$AM->defineEndOfContentPart('cases');?>
 </div>
 
@@ -89,16 +88,9 @@ $AM = new UserActionsManager('/examples/_resources/UAM');
             }
         },
         3: {
-            'action': 'complex/with_buffer',
+            'action': 'some_object/doRequestErrorCaptcha',
             'json': {
-                'hello_to': 'мир',
-                'part': 'cases'
-            }
-        },
-        4: {
-            'action': 'complex/speak',
-            'json': {
-                'hello_to': 'мир',
+                'token': ''
             }
         }
     };
@@ -128,9 +120,15 @@ $AM = new UserActionsManager('/examples/_resources/UAM');
                json = JSON.parse(form_elements.json_textarea.value);
                json['user_action'] = form_elements.action_input.value;
 
-               NGRequest.setData(json, {success: (d) => {
-                   document.querySelector('.js-response_container').innerHTML = d;
-               }});
+               NGRequest.setData(json, {
+                   success: (d) => {
+                       document.querySelector('.js-response_container').innerHTML = d;
+                   },
+                   error: ( e ) => {
+                       document.querySelector('.js-response_container').innerHTML = e.msg;
+                   },
+
+               });
                NGRequest.send();
 
                console.log( json );
