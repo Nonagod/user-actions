@@ -111,3 +111,14 @@ $UAManager->defineEndOfContentPart('<part_name>');
   ("Что-то пошло не так")
 - [ ] Подумать, может можно сделать для обработчиков свой класс, чтобы убрать рутину из обработчиков. (+ управлять 
   валидацией и откатом)
+- [ ] Заменить очистку активных буферов в методе `defineStartOfContentPart`
+```php
+/*for( $i = 0; $i < ob_get_level()+1; $i++ ) {
+    $trashed_content = ob_get_clean();
+    unset($trashed_content);
+}*/
+while( ob_get_length( )) {
+    $trashed_content = ob_get_clean();
+    unset($trashed_content);
+}
+```
